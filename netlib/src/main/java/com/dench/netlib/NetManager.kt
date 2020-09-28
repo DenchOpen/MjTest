@@ -14,10 +14,9 @@ class NetManager private constructor() {
     private var retrofit: Retrofit
 
     companion object {
+        const val url = "https://api.github.com"
         val instance by lazy { NetManager() }
     }
-
-    private val url = "https://api.github.com"
 
     init {
         retrofit = Retrofit.Builder()

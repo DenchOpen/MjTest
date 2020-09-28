@@ -60,6 +60,9 @@ dependencies {
 //    // banner
 //    implementation rootProject.depsLibs.banner
 
+    // mmkv
+    implementation rootProject.depsLibs.mmkv
+
     implementation project(path: ':netlib')
 
     testImplementation rootProject.depsLibs.junit

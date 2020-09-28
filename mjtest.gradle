@@ -10,7 +10,7 @@ ext {
             glideVersion             : '4.11.0',
             bannerVersion            : '2.0.8',
             refreshVersion           : '2.0.1',
-            mmkvVersion              : '1.1.1',
+            mmkvVersion              : '1.2.2',
     ]
     depsLibs = [
             coreKtx              : 'androidx.core:core-ktx:1.3.1',
