@@ -15,7 +15,7 @@ import com.dench.mjtest.repository.MjRepo
 import kotlinx.coroutines.launch
 import java.lang.ref.WeakReference
 
-class MainActivityVM : ViewModel() {
+class MainVM : ViewModel() {
     private val repo = MjRepo.create()
 
     val gaData = MutableLiveData<GAData>()
@@ -37,7 +37,7 @@ class MainActivityVM : ViewModel() {
         Log.d(Thread.currentThread().name, "startTask()")
         // load native
         if (gaData.value == null) {
-            val t = RepositoryDB.fetchUrlData("\\", GAData::class.java)
+            val t = RepositoryDB.fetchUrlData("/", GAData::class.java)
             if (t != null) {
                 requestNotice.value = "当前显示的是历史数据"
                 gaData.value = t
@@ -55,14 +55,14 @@ class MainActivityVM : ViewModel() {
         viewModelScope.launch {
             val result = callRequest { repo.requestApi() }
             if (result is NetResult.Success) {
-                RepositoryDB.recordUrlData("\\", result.data)
+                RepositoryDB.recordUrlData("/", result.data)
                 gaData.postValue(result.data)
                 requestNotice.value = "第${count}次服务请求成功"
-                HistoryDB.recordHistory("\\", true, "请求成功")
+                HistoryDB.recordHistory("/", true, "请求成功")
                 sendNext()
             } else if (result is NetResult.Error) {
                 requestNotice.value = "第${count}次服务请求失败: ${result.exception.msg}"
-                HistoryDB.recordHistory("\\", false, result.exception.msg)
+                HistoryDB.recordHistory("/", false, result.exception.msg)
                 sendNext()
             }
         }
@@ -76,7 +76,7 @@ class MainActivityVM : ViewModel() {
         handler!!.postDelayed(task, 5 * 1000)
     }
 
-    inner class ApiRunnableTask(viewModel: MainActivityVM) : Runnable {
+    inner class ApiRunnableTask(viewModel: MainVM) : Runnable {
         private val weakReference = WeakReference(viewModel)
         override fun run() {
             Log.d(Thread.currentThread().name, "schedule a task.")

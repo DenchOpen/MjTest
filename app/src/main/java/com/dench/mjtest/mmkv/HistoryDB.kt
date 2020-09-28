@@ -1,10 +1,10 @@
 package com.dench.mjtest.mmkv
 
+import android.util.Log
 import com.dench.mjtest.data.HistoryData
 import com.dench.netlib.GsonHelper
 import com.dench.netlib.NetManager
 import com.tencent.mmkv.MMKV
-import kotlin.math.max
 
 // 记录请求历史
 object HistoryDB {
@@ -26,23 +26,18 @@ object HistoryDB {
     }
 
     fun getHistory(): MutableList<HistoryData> {
+        Log.d("HistoryDB", "getHistory()")
         val result = mutableListOf<HistoryData>()
         val kv = MMKV.mmkvWithID("history")
         if (len == 0) len = kv.decodeInt("len")
-        for (i in len..0) {
+        for (i in 1..len) {
             val v = kv.decodeString("$i")
-            result.add(GsonHelper.fromJson(v, HistoryData::class.java)!!)
-        }
-        return result
-    }
-
-    fun getLastPage(): MutableList<HistoryData> {
-        val result = mutableListOf<HistoryData>()
-        val kv = MMKV.mmkvWithID("history")
-        if (len == 0) len = kv.decodeInt("len")
-        for (i in len..max(len - 20, 0)) {
-            val v = kv.decodeString("$i")
-            result.add(GsonHelper.fromJson(v, HistoryData::class.java)!!)
+            if (v != null) {
+                Log.d("$i", v)
+                result.add(0, GsonHelper.fromJson(v, HistoryData::class.java)!!)
+            } else {
+                Log.e("$i", "empty!!!")
+            }
         }
         return result
     }
