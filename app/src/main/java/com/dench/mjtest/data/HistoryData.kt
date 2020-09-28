@@ -4,5 +4,5 @@ data class HistoryData(
     val timeMill: Long,
     val url: String,
     val success: Boolean,
-    val ext: String
+    val ext: String?
 )

@@ -1,15 +1,12 @@
 package com.dench.mjtest.ui
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import com.dench.mjtest.R
+import com.dench.mjtest.base.BaseActivity
 import com.dench.mjtest.databinding.ActivityMainBinding
 import com.dench.mjtest.viewmodel.MainActivityVM
-import com.dench.netlib.GsonHelper
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : BaseActivity() {
     private lateinit var viewModel: MainActivityVM
     private lateinit var dataBinding: ActivityMainBinding
 
@@ -28,12 +25,13 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun initView() {
-        viewModel.gaData.observe(this, Observer { value ->
+        viewModel.gaData.observe(this, { value ->
             dataBinding.data = value
         })
-
+        viewModel.requestNotice.observe(this, { message ->
+            dataBinding.message = message
+        })
         viewModel.startTask()
     }
-
 
 }
