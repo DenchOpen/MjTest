@@ -30,3 +30,8 @@ Info:
 https://blog.csdn.net/forebe/article/details/79997814
 
 https://www.cnblogs.com/chenjy1225/p/9662071.html
+
+https://blog.csdn.net/SmileToLin/article/details/79940203
+
+https://xiazdong.github.io/2017/06/15/android-fragment/
+
