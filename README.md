@@ -25,6 +25,10 @@
 2. 如果在有限时间内不能完成所有功能要求，可以选择完成部分功能。
 
 
+// 202101
+gson中TypeAdapter实现自定义序列化操作
+https://blog.csdn.net/fu_huo_1993/article/details/88224972
+
 Info:
 
 https://blog.csdn.net/forebe/article/details/79997814
